@@ -26,7 +26,7 @@
 - **Fat Lines:** Use `Line2`, `LineGeometry`, and `LineMaterial` from `three/addons/lines/` when adjustable line thickness is required.
 
 ## 4. UI & Control Architecture
-- **Vanilla DOM Overlay & Minecraft Styling:** Maintain zero framework overhead. Keep UI controls, Minecraft-inspired menus (pixel fonts, bevelled buttons, semi-transparent overlays), hotbar rendering, tool name banners, and status overlays in lightweight Vanilla TypeScript modules.
+- **Vanilla DOM Overlay & Pixelated Retro HUD:** Maintain zero framework overhead. Keep UI controls, retro HUD menus (pixel fonts, bevelled buttons, semi-transparent overlays), hotbar rendering, tool name banners, and status overlays in lightweight Vanilla TypeScript modules.
 - **Pointer Lock & Menu State Machine:** Handle `pointerlockchange` and `pointerlockerror` events cleanly. When pointer lock is disengaged via `Escape`, seamlessly transition to `PAUSED_QUICK_MENU`.
 
 ## 5. Continuous Documentation Rule

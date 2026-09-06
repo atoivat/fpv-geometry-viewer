@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A fast, lightweight, web-based tool for visualizing 3D point clouds (`.ply`), meshes, and CAD drawings (`.dxf`) using Minecraft-inspired First-Person View (FPV) controls, hotbar tools, and retro UI aesthetics. Open-source under the MIT License.
+A fast, lightweight, web-based tool for visualizing 3D point clouds (`.ply`), meshes, and CAD drawings (`.dxf`) using First-Person View (FPV) controls, hotbar tools, and retro HUD UI aesthetics. Open-source under the MIT License.
 
 ---
 
@@ -12,11 +12,11 @@ A fast, lightweight, web-based tool for visualizing 3D point clouds (`.ply`), me
 - **Z-Up & Precision Auto-Centering**: Enforces global Z-Up world coordinates and automatically centers large survey/CAD geometries at origin `(0, 0, 0)` to eliminate GPU floating-point precision jitter while retaining coordinate offset metadata.
 - **1m Grid Floor & Depth Fog**: 1-meter square grid floor automatically positioned at the lowest $Z_{\min}$ of loaded models, coupled with default exponential distance fog (`THREE.FogExp2`).
 - **Eye-Dome Lighting (EDL)**: Screen-space post-processing depth shader for silhouette edge highlighting and depth contour shading on monochromatic point clouds.
-- **Minecraft FPV Controls**:
+- **First-Person View (FPV / FPS) Controls**:
   - Mouse pitch & yaw rotation using Pointer Lock API cursor capture.
   - Horizontal `WASD` movement aligned to camera facing direction (independent of pitch angle).
   - Vertical `Space` (+Z) and `Shift` (-Z) translation.
-- **Minecraft UI & Menu System**:
+- **Retro HUD & Menu System**:
   - **Start Menu**: Initial screen with controls overview and file loader.
   - **Quick Pause Menu**: Eye-Dome Lighting toggle, file loading, and exit options (`Escape` key trigger).
   - **10-Slot Modular Hotbar**: Anchor toolbar supporting slot switching via `1`-`9`, `0` keys and mouse scroll wheel with floating tool name banner.

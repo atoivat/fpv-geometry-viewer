@@ -1,7 +1,7 @@
 # FPV Mesh & Point Cloud Visualizer - Requirements
 
 ## Overview
-A simple, fast, and portable web-based tool to visualize 3D meshes and point clouds in a First-Person View (FPV) with Minecraft-inspired controls and UI styling. Open-source under the MIT License.
+A simple, fast, and portable web-based tool to visualize 3D meshes and point clouds in a First-Person View (FPV) with retro 3D HUD UI styling. Open-source under the MIT License.
 
 ## Core Features
 - **File Inputs:** 
@@ -24,7 +24,7 @@ A simple, fast, and portable web-based tool to visualize 3D meshes and point clo
 - **Physics:**
   - No collision detection. The camera passes freely through all geometries.
 
-## Controls (Minecraft-Style)
+## Controls (First-Person View / FPS Style)
 - **Mouse:** Rotates the camera (pitch and yaw).
   - Implement pointer lock (cursor capture).
 - **WASD (Horizontal Translation):**
@@ -45,9 +45,9 @@ A simple, fast, and portable web-based tool to visualize 3D meshes and point clo
   5. **Mesh Wireframe Width (🕸️):** Left-click increases wireframe thickness; right-click decreases.
   6. **Flight Speed (⚡):** Left-click increases camera speed (`+2.0 m/s`); right-click decreases.
 
-## Menus & UI Styling (Minecraft-Inspired)
+## Menus & UI Styling (Pixelated Retro HUD)
 - **Visual Aesthetic:**
-  - Minecraft-style pixelated typography, 3D bevelled button borders, and dark semi-transparent overlays.
+  - Retro pixelated typography, 3D bevelled button borders, and dark semi-transparent overlays.
 - **Start Menu (Initial Screen):**
   - Title/Logo, **Load Files** button / drag-and-drop zone, **Controls Guide**, and **Start Visualizer** button.
 - **Quick Menu (Quick Pause Menu):**
@@ -55,7 +55,7 @@ A simple, fast, and portable web-based tool to visualize 3D meshes and point clo
   - Buttons: **Back to Visualizer**, **Load / Add Files**, **Eye-Dome Lighting (EDL) Toggle**, and **Exit to Start Menu**.
 
 ## Tech Stack & Deployment
-- **Language:** Vanilla TypeScript (Strict type checking, zero framework overhead).
+- **Language:** Vanilla TypeScript (Strict type checking, no framework overhead).
 - **3D Engine:** Three.js (`three` & `three/addons/...`).
 - **File Parsers:** `PLYLoader` & `dxf-parser`.
 - **Build System:** Vite (`base: './'` for GitHub Pages static hosting).
