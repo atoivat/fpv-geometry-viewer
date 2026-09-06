@@ -1,7 +1,7 @@
 # FPV Mesh & Point Cloud Visualizer - Requirements
 
 ## Overview
-A simple, fast, and portable web-based tool to visualize 3D meshes and point clouds in a First-Person View (FPV).
+A simple, fast, and portable web-based tool to visualize 3D meshes and point clouds in a First-Person View (FPV) with Minecraft-inspired controls and UI styling. Open-source under the MIT License.
 
 ## Core Features
 - **File Inputs:** 
@@ -11,6 +11,10 @@ A simple, fast, and portable web-based tool to visualize 3D meshes and point clo
 - **Coordinate System & Auto-Centering:**
   - **Z-Up Convention:** Default world orientation is Z-Up (`Object3D.DEFAULT_UP.set(0, 0, 1)`).
   - **Precision & Centering:** Auto-center geometry at origin `(0, 0, 0)` upon import to prevent 32-bit GPU floating-point jitter with large coordinates. Retain original coordinate offsets for reference.
+- **Environment & Lighting:**
+  - **1m Grid Floor:** 1-meter square grid plane automatically positioned at the lowest $Z_{\min}$ of loaded models (enabled by default).
+  - **Depth Fog:** Exponential distance fog (`THREE.FogExp2`) enabled by default.
+  - **Eye-Dome Lighting (EDL):** Screen-space post-processing depth shader for silhouette edge highlighting and crevice darkening on monochromatic point clouds.
 - **DXF Parsing:**
   - Basic wireframe geometry support (`LINE`, `LWPOLYLINE`, `ARC`, `CIRCLE`, etc.).
   - Preserves native colors defined per layer/entity within the DXF file.
@@ -24,37 +28,37 @@ A simple, fast, and portable web-based tool to visualize 3D meshes and point clo
 - **Mouse:** Rotates the camera (pitch and yaw).
   - Implement pointer lock (cursor capture).
 - **WASD (Horizontal Translation):**
-  - Translates the camera strictly on the horizontal plane (XY plane in Z-Up).
-  - Looking up or down does not alter the movement vector (forward/backward movement remains parallel to the ground).
+  - Translates the camera forward (`W`), backward (`S`), right (`D`), and left (`A`) along camera facing direction in horizontal XY plane.
+  - Looking up or down does not alter horizontal movement vector.
 - **Vertical Translation:**
   - `Space`: Increases Z (moves up).
   - `Shift`: Decreases Z (moves down).
 
 ## Toolbar & Modular Tools (Hotbar)
-- **UI Structure:** 10-slot modular toolbar anchored at the bottom-center of the screen.
+- **UI Structure:** 10-slot modular toolbar anchored at the bottom-center of the screen with active tool name floating banner.
 - **Slot Selection:** Number keys (`1`-`9`, `0`) and mouse scroll wheel to switch active slot.
-- **Initial Tools:**
-  1. **PLY Point Size:** Left-click increases point size; right-click decreases.
-  2. **DXF Point Size:** Left-click increases point size; right-click decreases.
-  3. **DXF Line Width:** Left-click increases line thickness (using `Line2`/`LineMaterial`); right-click decreases.
-  4. **Mesh Wireframe Line Width:** Left-click increases line/wireframe thickness; right-click decreases.
-- **Modular Tool Architecture:** Tools implement a standard interface (`activate`, `deactivate`, `onPrimaryAction` [left click], `onSecondaryAction` [right click]).
+- **Tools Implemented:**
+  1. **Colorize Cloud (🎨):** Left-click applies/cycles 3D spatial color gradients (Z-Height $\rightarrow$ Full 3D XYZ$\rightarrow$RGB $\rightarrow$ Rainbow); right-click restores original colors.
+  2. **PLY Point Size (🟢):** Left-click increases point size; right-click decreases.
+  3. **DXF Point Size (🟡):** Left-click increases point size; right-click decreases.
+  4. **DXF Line Width (📏):** Left-click increases line thickness; right-click decreases.
+  5. **Mesh Wireframe Width (🕸️):** Left-click increases wireframe thickness; right-click decreases.
+  6. **Flight Speed (⚡):** Left-click increases camera speed (`+2.0 m/s`); right-click decreases.
 
 ## Menus & UI Styling (Minecraft-Inspired)
 - **Visual Aesthetic:**
-  - Minecraft-style pixelated typography, 3D bevelled button borders (dark grey/light grey borders with hover highlights), and dark semi-transparent overlays.
+  - Minecraft-style pixelated typography, 3D bevelled button borders, and dark semi-transparent overlays.
 - **Start Menu (Initial Screen):**
-  - Shown upon initial application load before entering the 3D scene.
-  - Includes logo/title, **Load Files** button / drag-and-drop zone, **Controls Guide**, and **Start Visualizer** button.
+  - Title/Logo, **Load Files** button / drag-and-drop zone, **Controls Guide**, and **Start Visualizer** button.
 - **Quick Menu (Quick Pause Menu):**
   - Triggered by pressing `Escape` during visualizer execution (releases pointer lock).
-  - Semi-transparent backdrop overlay over the frozen 3D scene.
-  - Buttons: **Back to Visualizer** (re-engages pointer lock), **Load / Add Files**, **Controls / Help**, and **Exit to Start Menu**.
+  - Buttons: **Back to Visualizer**, **Load / Add Files**, **Eye-Dome Lighting (EDL) Toggle**, and **Exit to Start Menu**.
 
-## Tech Stack & Development Requirements
-- **Language:** Vanilla TypeScript (Strict type checking, no framework overhead).
+## Tech Stack & Deployment
+- **Language:** Vanilla TypeScript (Strict type checking, zero framework overhead).
 - **3D Engine:** Three.js (`three` & `three/addons/...`).
-- **File Parsers:** `PLYLoader` (Three.js ecosystem) & `dxf-parser`.
-- **Build System:** Vite (Fast ESM bundling, compile to static assets).
-- **Testing Framework:** Vitest (Test-Driven Development for camera math, tool state, and geometry parsers).
-- **Development Practice:** Test-Driven Development (TDD) — write unit tests before implementation for math, parsers, UI state transitions, and tool state logic.
+- **File Parsers:** `PLYLoader` & `dxf-parser`.
+- **Build System:** Vite (`base: './'` for GitHub Pages static hosting).
+- **Testing Framework:** Vitest (TDD workflow).
+- **Deployment:** GitHub Pages via GitHub Actions workflow (`.github/workflows/deploy.yml`).
+- **License:** MIT License.
