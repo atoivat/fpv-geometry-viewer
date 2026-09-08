@@ -17,10 +17,11 @@
 
 ## 3. WebGL & Three.js Performance Guidelines
 - **Z-Up World Coordinates:** Enforce `Object3D.DEFAULT_UP.set(0, 0, 1)` globally before constructing cameras or loading models.
-- **Origin Auto-Centering:** On importing geometries with large coordinates:
-  1. Compute bounding box / centroid.
-  2. Translate coordinates to `(0, 0, 0)`.
-  3. Store the centroid offset in model metadata for UI reference.
+- **Origin Auto-Centering & Global Shift:** On importing geometries with large/georeferenced coordinates (e.g. UTM):
+  1. Parse coordinates in 64-bit precision (`Float64Array` / double precision numbers).
+  2. Compute bounding box / centroid in 64-bit math.
+  3. Translate coordinates relative to origin `(0, 0, 0)` BEFORE constructing `Float32Array` attributes to avoid WebGL floating-point quantization jitter/striping.
+  4. Store the centroid offset in model metadata for UI reference.
 - **Eye-Dome Lighting (EDL) Shader:** Use two-pass depth post-processing (`renderTarget` with `DepthTexture`) for silhouette contour shading. Filter out background depth samples ($d \ge 0.98 \times \text{far}$) to prevent scene darkening.
 - **Resource Cleanup & Memory Safety:** Explicitly call `.dispose()` on geometries, materials, depth textures, and line shaders when clearing scenes or reloading files to avoid WebGL memory leaks.
 - **Fat Lines:** Use `Line2`, `LineGeometry`, and `LineMaterial` from `three/addons/lines/` when adjustable line thickness is required.
